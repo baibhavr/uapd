@@ -1,0 +1,60 @@
+#include <iostream>
+#include <stdio.h>
+
+#define HEIGHT 5
+#define WIDTH 3
+#define DEPTH 7
+#define orientations 9
+
+int main_nDim_array() {
+//  double ***p2DArray = new double**[HEIGHT];
+//  for (int i = 0; i < HEIGHT; ++i) {
+//    p2DArray[i] = new double*[WIDTH];
+//
+//    for (int j = 0; j < WIDTH; ++j)
+//      p2DArray[i][j] = new double[DEPTH];
+//  }
+//
+//  // Assign values
+//  p2DArray[0][0][0] = 3.6;
+//  p2DArray[1][2][4] = 4.0;
+//
+//  printf("%g",p2DArray[1][2][4]);
+//
+//  // De-Allocate memory to prevent memory leak
+//  for (int i = 0; i < HEIGHT; ++i) {
+//    for (int j = 0; j < WIDTH; ++j)
+//      delete [] p2DArray[i][j];
+//
+//    delete [] p2DArray[i];
+//  }
+//  delete [] p2DArray;
+
+
+
+	int n_cellsx = 1;//floor(sx / cx);  // number of cells in x
+	int n_cellsy = 1;//floor(sy / cy);  // number of cells in y
+
+	// 3d array  memory allocated
+	int ***orient_hist = new int**[n_cellsx];
+
+	printf("n_cellsx = %d and n_cellsy = %d \n",n_cellsx,n_cellsy);
+
+	for(int i=0;i<n_cellsx;++i){
+		orient_hist[i] = new int*[n_cellsy];
+		for(int j=0;j<n_cellsy;++j)
+			orient_hist[i][j] = new int[orientations];
+	}
+
+
+	// De- Allocate pointer memory
+	for(int i=0;i<n_cellsx;++i){
+		for(int j=0;j<n_cellsy;++j){
+			delete [] orient_hist[i][j];
+		}
+		delete [] orient_hist[i];
+	}
+	delete [] orient_hist;
+
+	return 0;
+}
